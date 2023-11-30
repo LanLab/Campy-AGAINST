@@ -3,13 +3,16 @@ import subprocess
 import glob
 import tempfile
 import os
-from pkg_resources import resource_filename
+import uuid
+from importlib import resources
 #example run: python CampyAGAINST.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
 
 
 def get_ref_folder_data():
     try:
-        ref_folder = resource_filename("CampyAGAINST","resources/Reference_genomes")
+        ref_folder = resources.path("CampyAGAINST","resources/Reference_genomes")
+        ref_folder = resources.as_file(ref_folder)
+        # ref_folder = rresource_filename("CampyAGAINST","resources/Reference_genomes")
     except:
         curr_dir = os.path.dirname(os.path.realpath(__file__))
         ref_folder = os.path.join(curr_dir, 'resources/Reference_genomes')
@@ -18,6 +21,8 @@ def get_ref_folder_data():
 
 
 def run_fastANI(args):
+    uid = str(uuid.uuid1())
+
     temp_directory = "fastANI_result"
     if not os.path.exists(temp_directory):
         os.mkdir(temp_directory)
