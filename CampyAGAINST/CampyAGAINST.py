@@ -17,6 +17,7 @@ def get_ref_folder_data():
         curr_dir = os.path.dirname(os.path.realpath(__file__))
         ref_folder = os.path.join(curr_dir, 'resources/Reference_genomes')
     # sys.stderr.write("db file location: " + db_file)
+    print(ref_folder)
     return ref_folder
 
 
