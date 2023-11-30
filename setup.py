@@ -43,7 +43,7 @@ setup(name='campy-against',
       packages=find_packages(),
       include_package_data=True,
       entry_points={
-          'console_scripts': ['campy-against=CampyAGAINST.CampyAGAINST:main'],
+          'console_scripts': ['campyagainst=CampyAGAINST.CampyAGAINST:main'],
       },
       cmdclass={
         'install': CustomInstallCommand,

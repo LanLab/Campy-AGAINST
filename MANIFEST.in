@@ -1,2 +1,2 @@
-global-include Campy-AGAINST/*
-graft Campy-AGAINST/resources
+global-include CampyAGAINST/*
+graft CampyAGAINST/resources
