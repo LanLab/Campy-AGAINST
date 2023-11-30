@@ -24,7 +24,7 @@ class CustomInstallCommand(install):
                 zip_ref.extractall(extraction_path)
         else:
             sys.exit(f"{zip_file_path} does not exist")
-setup(name='campy-against',
+setup(name='campyagainst',
       version=__version__,
       description='assignment of ANI genomic species to Campylobacter genomes',
       long_description=readme(),
