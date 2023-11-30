@@ -3,7 +3,6 @@ import sys
 
 from setuptools import setup,find_packages
 from dodge import __version__
-from setuptools.command.install import install
 import zipfile
 
 def readme():
@@ -11,19 +10,22 @@ def readme():
         return f.read()
 
 
-class CustomInstallCommand(install):
-    def run(self):
-        # Call the default install command
-        install.run(self)
+def extract_zip(zip_file, destination):
+    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+        zip_ref.extractall(destination)
 
-        # Extract your zip file after installation
-        zip_file_path = 'CampyAGAINST/resources/Reference_genomes.zip'
-        extraction_path = 'CampyAGAINST/resources/'
-        if os.path.exists(zip_file_path):
-            with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-                zip_ref.extractall(extraction_path)
-        else:
-            sys.exit(f"{zip_file_path} does not exist")
+zip_file_path = os.path.join(os.path.dirname(__file__), 'CampyAGAINST','Resources', 'Reference_genomes.zip')
+extracted_dir = os.path.join(os.path.dirname(__file__), 'CampyAGAINST','Resources')
+
+extract_zip(zip_file_path, extracted_dir)
+
+package_data = []
+for root, dirs, files in os.walk(extracted_dir):
+    for file in files:
+        file_path = os.path.relpath(os.path.join(root, file), extracted_dir)
+        package_data.append(file_path)
+
+
 setup(name='campyagainst',
       version=__version__,
       description='assignment of ANI genomic species to Campylobacter genomes',
@@ -45,7 +47,6 @@ setup(name='campyagainst',
       entry_points={
           'console_scripts': ['campyagainst=CampyAGAINST.CampyAGAINST:main'],
       },
-      cmdclass={
-        'install': CustomInstallCommand,
+      package_data={"campyagainst": package_data
       },
       zip_safe=False)
