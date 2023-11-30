@@ -24,7 +24,7 @@ def get_ref_folder_data():
 def run_fastANI(args):
     uid = str(uuid.uuid1())
 
-    temp_directory = "fastANI_result"
+    temp_directory = uid + "_fastANI_result"
     if not os.path.exists(temp_directory):
         os.mkdir(temp_directory)
     # Create two temporary files in the fastani result folder
@@ -134,7 +134,7 @@ def ksi(fastANI_output, args):
                 highest_ani_values[query_genome] = (ani_value, reference_genome, ani_cluster)
     # Open and write to the output text file.
     with open(args.output, "w") as output_file:
-        output_file.write("Query Genome\tHighest ANI Value\tReference Genome\tReference Genome_ANI Genomic Species\tCampylobacter Genomic Species\tPossible Novel genomic species\n")
+        output_file.write("Query Genome\tHighest ANI Value\tMatching centroid genome\tANI cluster number\tCampylobacter Genomic Species\tPossible Novel genomic species\n")
         # Write the data to the output file.
         for query_genome, (highest_ani, reference_genome, ani_cluster) in highest_ani_values.items():
             if highest_ani >= 94.2:
