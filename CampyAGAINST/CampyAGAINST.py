@@ -31,7 +31,7 @@ def run_fastANI(args):
             tempfile.NamedTemporaryFile(mode='w', delete=False, dir=temp_directory) as rl_file:
         query_genomes = glob.glob(os.path.join(args.query, '*.fasta'))
         reffolder = get_ref_folder_data()
-        reference_genomes = glob.glob(os.path.join(reffolder, '/*.fasta'))
+        reference_genomes = glob.glob(reffolder+'/*.fasta')
         for file in query_genomes:
             ql_file.write(file + '\n')
         for file in reference_genomes:
