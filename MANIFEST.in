@@ -1,2 +1,2 @@
-global-include campy-against/*
-graft campy-against/resources
+global-include campyagainst/*
+graft campyagainst/resources

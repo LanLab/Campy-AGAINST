@@ -5,14 +5,14 @@ import tempfile
 import os
 import uuid
 from importlib import resources
-#example run: python campy-against.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
+#example run: python campyagainst.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
 
 
 def get_ref_folder_data():
     try:
-        ref_folder = resources.path("campy-against","resources/Reference_genomes")
+        ref_folder = resources.path("campyagainst","resources/Reference_genomes")
         ref_folder = resources.as_file(ref_folder)
-        # ref_folder = rresource_filename("campy-against","resources/Reference_genomes")
+        # ref_folder = rresource_filename("campyagainst","resources/Reference_genomes")
     except:
         curr_dir = os.path.dirname(os.path.realpath(__file__))
         ref_folder = os.path.join(curr_dir, 'resources/Reference_genomes')
