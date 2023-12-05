@@ -1,4 +1,4 @@
-# Campy-AGAINST
+# campy-against
 A python script for accurate assignment of ANI genomic species to Campylobacter genomes. 
 
 
@@ -6,13 +6,13 @@ A python script for accurate assignment of ANI genomic species to Campylobacter 
 
 ### with conda/mamba - NOT YET AVAILABLE
 
-`conda install -c bioconda dodge`
+`conda install -c bioconda campy-against`
 
 ### without conda
 
-`git clone https://github.com/LanLab/Campy-AGAINST.git`
+`git clone https://github.com/LanLab/campy-against.git`
 
-`cd Campy-AGAINST`
+`cd campy-against`
 
 `python setup.py install`
 
@@ -22,7 +22,7 @@ A python script for accurate assignment of ANI genomic species to Campylobacter 
 
 ## Usage
 
-`campyagainst [-h] -i QUERYFOLDER -o OUTPUTFILE [-t THREADS]`
+`campy-against [-h] -i QUERYFOLDER -o OUTPUTFILE [-t THREADS]`
 
 `-h`, `--help`            show this help message and exit
 

@@ -14,8 +14,8 @@ def extract_zip(zip_file, destination):
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
         zip_ref.extractall(destination)
 
-zip_file_path = os.path.join(os.path.dirname(__file__), 'CampyAGAINST','Resources', 'Reference_genomes.zip')
-extracted_dir = os.path.join(os.path.dirname(__file__), 'CampyAGAINST','Resources')
+zip_file_path = os.path.join(os.path.dirname(__file__), 'campy-against', 'Resources', 'Reference_genomes.zip')
+extracted_dir = os.path.join(os.path.dirname(__file__), 'campy-against', 'Resources')
 
 extract_zip(zip_file_path, extracted_dir)
 
@@ -26,7 +26,7 @@ for root, dirs, files in os.walk(extracted_dir):
         package_data.append(file_path)
 
 
-setup(name='campyagainst',
+setup(name='campy-against',
       version=__version__,
       description='assignment of ANI genomic species to Campylobacter genomes',
       long_description=readme(),
@@ -38,15 +38,15 @@ setup(name='campyagainst',
           'Intended Audience :: Science/Research',
       ],
       keywords='genomic taxonomy campylobacter',
-      url='https://github.com/LanLab/Campy-AGAINST',
+      url='https://github.com/LanLab/campy-against',
       author='Ruochen Wu',
       author_email='ruochen.wu@unsw.edu.au',
       license='GPLv3',
-      packages=['CampyAGAINST', 'CampyAGAINST.resources'],
+      packages=['campy-against', 'campy-against.resources'],
       include_package_data=True,
       entry_points={
-          'console_scripts': ['campyagainst=CampyAGAINST.CampyAGAINST:main'],
+          'console_scripts': ['campy-against=campy-against.campy-against:main'],
       },
-      package_data={"campyagainst": package_data
+      package_data={"campy-against": package_data
       },
       zip_safe=False)
