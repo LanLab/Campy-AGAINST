@@ -2,7 +2,7 @@ import os.path
 import sys
 
 from setuptools import setup,find_packages
-from dodge import __version__
+from campy-against import __version__
 import zipfile
 
 def readme():
