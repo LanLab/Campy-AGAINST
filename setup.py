@@ -9,20 +9,13 @@ def readme():
     with open('README.md') as f:
         return f.read()
 
+genomedir = os.path.join(os.path.dirname(__file__), 'campyagainst', 'Resources')
 
-def extract_zip(zip_file, destination):
-    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-        zip_ref.extractall(destination)
-
-zip_file_path = os.path.join(os.path.dirname(__file__), 'campyagainst', 'Resources', 'Reference_genomes.zip')
-extracted_dir = os.path.join(os.path.dirname(__file__), 'campyagainst', 'Resources')
-
-extract_zip(zip_file_path, extracted_dir)
 
 package_data = []
-for root, dirs, files in os.walk(extracted_dir):
+for root, dirs, files in os.walk(genomedir):
     for file in files:
-        file_path = os.path.relpath(os.path.join(root, file), extracted_dir)
+        file_path = os.path.relpath(os.path.join(root, file), genomedir)
         package_data.append(file_path)
 
 
