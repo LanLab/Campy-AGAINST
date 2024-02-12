@@ -1,5 +1,5 @@
-# campyagainst
-A python script for accurate assignment of ANI genomic species to Campylobacter genomes. 
+# CampyGStyper
+Campylobacter Gnomic Species Typer. A python script for accurate assignment of ANI genomic species to Campylobacter genomes. 
 
 
 ## Installation
