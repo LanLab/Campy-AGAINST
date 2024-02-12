@@ -3,36 +3,18 @@ import subprocess
 import glob
 import tempfile
 import os
-import uuid
-from importlib import resources
-#example run: python campyagainst.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
 
-
-def get_ref_folder_data():
-    try:
-        ref_folder = resources.path("campyagainst","resources/Reference_genomes")
-        ref_folder = resources.as_file(ref_folder)
-        # ref_folder = rresource_filename("campyagainst","resources/Reference_genomes")
-    except:
-        curr_dir = os.path.dirname(os.path.realpath(__file__))
-        ref_folder = os.path.join(curr_dir, 'resources/Reference_genomes')
-    # sys.stderr.write("db file location: " + db_file)
-    print(ref_folder)
-    return ref_folder
-
+#example run: python CampyGStyper.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
 
 def run_fastANI(args):
-    uid = str(uuid.uuid1())
-
-    temp_directory = uid + "_fastANI_result"
+    temp_directory = "fastANI_result"
     if not os.path.exists(temp_directory):
         os.mkdir(temp_directory)
     # Create two temporary files in the fastani result folder
     with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=temp_directory) as ql_file, \
             tempfile.NamedTemporaryFile(mode='w', delete=False, dir=temp_directory) as rl_file:
         query_genomes = glob.glob(os.path.join(args.query, '*.fasta'))
-        reffolder = get_ref_folder_data()
-        reference_genomes = glob.glob(reffolder+'/*.fasta')
+        reference_genomes = glob.glob(os.path.join(args.reference, '*.fasta'))
         for file in query_genomes:
             ql_file.write(file + '\n')
         for file in reference_genomes:
@@ -134,16 +116,16 @@ def ksi(fastANI_output, args):
                 highest_ani_values[query_genome] = (ani_value, reference_genome, ani_cluster)
     # Open and write to the output text file.
     with open(args.output, "w") as output_file:
-        output_file.write("Query Genome\tHighest ANI Value\tMatching centroid genome\tANI cluster number\tCampylobacter Genomic Species\tPossible Novel genomic species\n")
+        output_file.write("Query Genome\tHighest ANI similarity\tReference Genome with the highest ANI similarity\tReference Genome_ANI Genomic Species\tCampylobacter Genomic Species\n")
         # Write the data to the output file.
         for query_genome, (highest_ani, reference_genome, ani_cluster) in highest_ani_values.items():
             if highest_ani >= 94.2:
                 # If yes, output the ANI genomic species and the Campylobacter genomic species
-                output_file.write(f"{query_genome}\t{highest_ani}\t{reference_genome}\t{ani_cluster}\t{campylobacter_genomic_species[int(ani_cluster)]}\tNo\n")
+                output_file.write(f"{query_genome}\t{highest_ani}\t{reference_genome}\t{ani_cluster}\t{campylobacter_genomic_species[int(ani_cluster)]}\n")
             else:
                 # If not, indicate this is a isolate belong to a novel genomic species in campylobacter
                 output_file.write(
-                    f"{query_genome}\t{highest_ani}\t{reference_genome}\t{ani_cluster}\t{campylobacter_genomic_species[int(ani_cluster)]}\tYes\n")
+                    f"{query_genome}\t{highest_ani}\t{reference_genome}\tNovel\tNovel Campylobacter genomic species\n")
 
         print(f"Output has been written to {args.output}")
 
@@ -152,12 +134,13 @@ def parseargs():
 
     parser.add_argument("-i", "--query", help="folder for the query genomes",
                         required=True)
-    parser.add_argument("-o", "--output", help="tabular output file with classifications for each genome in query folder", required=True)
+    parser.add_argument("-r", "--reference", help="folder for the 60 medoid genomes",
+                        required=True)
+    parser.add_argument("-o", "--output", help="CampyGStyper output csv file", required=True)
     parser.add_argument("-t", "--thread", help="number of thread to run fastANI",
                         default=4)
     args = parser.parse_args()
     return args
-
 def main():
     args = parseargs()
     fastANI_output = run_fastANI(args)
