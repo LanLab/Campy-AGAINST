@@ -1,2 +1,2 @@
-global-include campyagainst/*
-graft campyagainst/resources
+global-include campygstyper/*
+graft campygstyper/resources

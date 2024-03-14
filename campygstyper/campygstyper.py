@@ -4,7 +4,7 @@ import glob
 import tempfile
 import os
 
-#example run: python CampyGStyper.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
+#example run: python campygstyper.py --query TRIAL_QUERY --reference TRIAL_REFERENCE --thread 4 --output ./testing_output.txt
 
 def run_fastANI(args):
     temp_directory = "fastANI_result"

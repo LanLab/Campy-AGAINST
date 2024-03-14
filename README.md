@@ -6,13 +6,13 @@ Campylobacter Gnomic Species Typer. A python script for accurate assignment of A
 
 ### with conda/mamba - NOT YET AVAILABLE
 
-`conda install -c bioconda campyagainst`
+`conda install -c bioconda campygstyper`
 
 ### without conda
 
-`git clone https://github.com/LanLab/campyagainst.git`
+`git clone https://github.com/LanLab/campygstyper.git`
 
-`cd campyagainst`
+`cd campygstyper`
 
 `python setup.py install`
 
@@ -22,7 +22,7 @@ Campylobacter Gnomic Species Typer. A python script for accurate assignment of A
 
 ## Usage
 
-`campyagainst [-h] -i QUERYFOLDER -o OUTPUTFILE [-t THREADS]`
+`campygstyper [-h] -i QUERYFOLDER -o OUTPUTFILE [-t THREADS]`
 
 `-h`, `--help`            show this help message and exit
 

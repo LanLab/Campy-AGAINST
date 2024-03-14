@@ -2,14 +2,14 @@ import os.path
 import sys
 
 from setuptools import setup,find_packages
-from campyagainst import __version__
+from campygstyper import __version__
 import zipfile
 
 def readme():
     with open('README.md') as f:
         return f.read()
 
-genomedir = os.path.join(os.path.dirname(__file__), 'campyagainst', 'Resources')
+genomedir = os.path.join(os.path.dirname(__file__), 'campygstyper', 'Resources')
 
 
 package_data = []
@@ -19,7 +19,7 @@ for root, dirs, files in os.walk(genomedir):
         package_data.append(file_path)
 
 
-setup(name='campyagainst',
+setup(name='campygstyper',
       version=__version__,
       description='assignment of ANI genomic species to Campylobacter genomes',
       long_description=readme(),
@@ -35,11 +35,11 @@ setup(name='campyagainst',
       author='Ruochen Wu',
       author_email='ruochen.wu@unsw.edu.au',
       license='GPLv3',
-      packages=['campyagainst', 'campyagainst.resources'],
+      packages=['campygstyper', 'campygstyper.resources'],
       include_package_data=True,
       entry_points={
-          'console_scripts': ['campyagainst=campyagainst.campyagainst:main'],
+          'console_scripts': ['campygstyper=campygstyper.campygstyper:main'],
       },
-      package_data={"campyagainst": package_data
+      package_data={"campygstyper": package_data
       },
       zip_safe=False)
